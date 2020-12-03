@@ -1,0 +1,31 @@
+Topology
+    Sub-topologies:
+
+Sub-topology: 0
+	Source:  PRODUCT_CREATION_SOURCE_NAME (topics: [PRODUCT_CREATION_TOPIC_NAME])
+	--> PRODUCT_CREATION_PROCESSOR_NAME
+        Processor: PRODUCT_CREATION_PROCESSOR_NAME (stores: [product_State_Store])
+
+Sub-topology: 1
+	Source:  PRODUCT_UPDATE_SOURCE_NAME (topics: [PRODUCT_UPDATE_TOPIC_NAME])
+	--> PRODUCT_UPDATE_PROCESSOR_NAME
+        Processor: PRODUCT_UPDATE_PROCESSOR_NAME (stores: [product_State_Store])
+
+Sub-topology: 2
+	Source:  INVENTORY_UPDATE_SOURCE_NAME (topics: [INVENTORY_UPDATE_TOPIC_NAME])
+	--> INVENTORY_UPDATE_PROCESSOR_NAME
+        Processor: INVENTORY_UPDATE_PROCESSOR_NAME (stores: [product_State_Store, inventory_State_Store])
+        --> PRODUCT_UPDATE_PROCESSOR_NAME
+        Processor: PRODUCT_UPDATE_PROCESSOR_NAME (stores: [product_State_Store])
+
+Sub-topology: 3
+	Source:  ORDER_CREATION_SOURCE_NAME (topics: [ORDER_CREATION_TOPIC_NAME])
+	--> ORDER_CREATION_PROCESSOR_NAME
+        Processor: ORDER_CREATION_PROCESSOR_NAME (stores: [product_State_Store, inventory_State_Store, order_State_Store])
+        --> INVENTORY_UPDATE_PROCESSOR_NAME
+        Processor: INVENTORY_UPDATE_PROCESSOR_NAME (stores: [product_State_Store, inventory_State_Store])
+        --> PRODUCT_UPDATE_PROCESSOR_NAME
+        Processor: PRODUCT_UPDATE_PROCESSOR_NAME (stores: [product_State_Store])
+
+	Sink: ORDER_CREATION_PROCESSOR_NAME (topic: ORDER_REPORT_CREATION_TOPIC_NAME)
+	<-- TO_REPORTING_SERVICE_CREATION_SINK

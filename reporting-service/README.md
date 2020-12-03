@@ -1,5 +1,7 @@
 # reporting-service
 
+![reporting-service-kafka-topology](./reporting-service-kafka-topology.png?raw=true "reporting-service-kafka-topology")
+
 # REST API
 
 The REST API to the reporting-service app is described below.
