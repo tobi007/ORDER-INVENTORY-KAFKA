@@ -1,4 +1,4 @@
-version: '3'
+version: '3.0'
 services:
   zookeeper:
     image: wurstmeister/zookeeper
@@ -10,5 +10,37 @@ services:
     ports:
       - "9092:9092"
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ADVERTISED_HOST_NAME: kafka-docker
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+
+  inventory-managenemt:
+      image: inventory-managenemt
+      build:
+        context: inventory-managenemt/
+        dockerfile: Dockerfile
+
+      expose:
+        - "9000"
+      ports:
+        - "9000:9000"
+      restart: always
+      environment:
+        WAIT_HOSTS: kafka-docker:9092
+        KAFKA_HOSTS: kafka-docker:9092
+
+
+  reporting-service:
+    image: reporting-service
+    build:
+      context: reporting-service/
+      dockerfile: Dockerfile
+
+    expose:
+      - "9001"
+    ports:
+      - "9001:9001"
+    restart: always
+    environment:
+      WAIT_HOSTS: zookeeper:2181
+      KAFKA_HOSTS: kafka-docker:9092

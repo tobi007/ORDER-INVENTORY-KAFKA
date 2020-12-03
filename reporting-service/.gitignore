@@ -31,3 +31,25 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+*.DS_Store
+src/*.DS_Store
+*.DS_Store
+# Intellij
+.idea/
+*.iml
+**/*.iml
+*.iws
+*.log
+.idea/
+.properties/
+*/logs/**
+/target/**
