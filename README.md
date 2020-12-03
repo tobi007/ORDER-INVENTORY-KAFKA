@@ -6,6 +6,8 @@ The entire application is divided into two application services `inventory-manag
 
 it contains a `docker-compose.yml` file for starting the kafka server to handle messaging between two applications
 
+All object to be persisted are saved in RokcsDB (persistent key value store).
+
 ## Services
 
 - **[inventory-managenemt](./inventory-managenemt/README.md)**
