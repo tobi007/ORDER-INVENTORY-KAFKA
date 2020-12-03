@@ -1,5 +1,6 @@
 package com.tobi.order.processor.inventory.managenemt.controller;
 
+import com.tobi.order.processor.commons.model.CustomResponse;
 import com.tobi.order.processor.inventory.managenemt.model.Inventory;
 import com.tobi.order.processor.inventory.managenemt.model.InventoryUpdateDTO;
 import com.tobi.order.processor.inventory.managenemt.model.Product;
@@ -22,19 +23,20 @@ public class InventoryController {
 
     @ApiOperation("Get all Inventories Item")
     @GetMapping("/inventory/all")
-    public List<Inventory> getAllInventories() {
-        return inventoryService.getAllInventory();
+    public CustomResponse getAllInventories() {
+        return new CustomResponse(true, "", inventoryService.getAllInventory());
     }
 
     @ApiOperation("Get inventory Item by product name")
     @GetMapping("/inventory")
-    public Inventory getInventoryProductName(@RequestParam String productName) {
-        return inventoryService.getInventoryByProductName(productName);
+    public CustomResponse getInventoryProductName(@RequestParam String productName) {
+        return new CustomResponse(true, "", inventoryService.getInventoryByProductName(productName));
     }
 
     @ApiOperation("Update inventory Quantity by product name")
     @PostMapping("/inventory/update")
-    public void updateInventoryQuantityByName(@RequestBody InventoryUpdateDTO inventoryUpdateDTO) {
+    public CustomResponse updateInventoryQuantityByName(@RequestBody InventoryUpdateDTO inventoryUpdateDTO) {
         inventoryService.updateInventoryQuantityByName(inventoryUpdateDTO);
+        return new CustomResponse(true, "", null);
     }
 }

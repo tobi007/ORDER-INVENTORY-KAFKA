@@ -1,5 +1,6 @@
 package com.tobi.order.processor.reporting.service.controller;
 
+import com.tobi.order.processor.commons.model.CustomResponse;
 import com.tobi.order.processor.commons.model.Order;
 import com.tobi.order.processor.reporting.service.model.OrderReport;
 import com.tobi.order.processor.reporting.service.service.OrderService;
@@ -25,25 +26,25 @@ public class OrderController {
 
     @ApiOperation("Get all Orders Item")
     @GetMapping("/order/all")
-    public List<Order> getAllInventories() {
-        return orderService.getAllOrder();
+    public CustomResponse getAllInventories() {
+        return new CustomResponse(true, "", orderService.getAllOrder());
     }
 
     @ApiOperation("Get all Orders Item Group By Date")
     @GetMapping("/order/group/date/all")
-    public OrderReport getAllOrderGroupByDate() {
-        return orderService.getAllOrderGroupByDate();
+    public CustomResponse getAllOrderGroupByDate() {
+        return new CustomResponse(true, "", orderService.getAllOrderGroupByDate());
     }
 
     @ApiOperation("Get all Orders Item By Date Range and Group By Date")
     @GetMapping("/order/group/daterange")
-    public OrderReport getAllOrderByDateRangeGroupByDate(@RequestParam String from, @RequestParam String to) throws ParseException {
-        return orderService.getAllOrderByDateRangeGroupByDate(from, to);
+    public CustomResponse getAllOrderByDateRangeGroupByDate(@RequestParam String from, @RequestParam String to) throws ParseException {
+        return new CustomResponse(true, "", orderService.getAllOrderByDateRangeGroupByDate(from, to));
     }
 
     @ApiOperation("Get Order Item by id")
     @GetMapping("/order")
-    public Order getInventoryProductName(@RequestParam String id) {
-        return orderService.getOrderById(id);
+    public CustomResponse getInventoryProductName(@RequestParam String id) {
+        return new CustomResponse(true, "", orderService.getOrderById(id));
     }
 }

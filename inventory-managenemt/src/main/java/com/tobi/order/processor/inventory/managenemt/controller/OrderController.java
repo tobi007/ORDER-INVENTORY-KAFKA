@@ -1,5 +1,6 @@
 package com.tobi.order.processor.inventory.managenemt.controller;
 
+import com.tobi.order.processor.commons.model.CustomResponse;
 import com.tobi.order.processor.inventory.managenemt.model.OrderCreateDTO;
 import com.tobi.order.processor.inventory.managenemt.service.OrderService;
 import io.swagger.annotations.Api;
@@ -18,7 +19,8 @@ public class OrderController {
 
     @ApiOperation("Create a new Order Item")
     @PostMapping(value = "/order/create")
-    public void createOrder(@RequestBody OrderCreateDTO orderCreateDTO) {
+    public CustomResponse createOrder(@RequestBody OrderCreateDTO orderCreateDTO) {
         orderService.createOrder(orderCreateDTO);
+        return new CustomResponse(true, "", null);
     }
 }
