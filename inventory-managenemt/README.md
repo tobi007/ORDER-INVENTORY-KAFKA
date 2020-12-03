@@ -1,5 +1,7 @@
 # inventory-managenemt service
 
+![inventory-management-kafka-topology](./inventory-management-kafka-topology.png?raw=true "inventory-management-kafka-topology")
+
 # REST API
 
 The REST API to the inventory-managenemt service app is described below.
